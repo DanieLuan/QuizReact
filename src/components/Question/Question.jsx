@@ -10,8 +10,12 @@ const Question = () => {
     const [quizState, dispatch] = useContext(quizContext);
     const currentQuestion = quizState.questions[quizState.currentQuestion]
 
-    const onSelectOption = () => {
-        console.log("teste")
+    const onSelectOption = (option) => {
+        console.log(option)
+        dispatch({
+            type: "CHECK_ANSWER",
+            payload : {answer: currentQuestion.answer, option}
+        });
     }
 
     return (
@@ -23,8 +27,8 @@ const Question = () => {
                     <Option 
                         option = {option} 
                         key = {option} 
-                        answer = {currentQuestion.answer} 
-                        selecOption = {() => onSelectOption()}
+                        answer = {currentQuestion.answer}
+                        selectOption = {() => onSelectOption(option)}
                     />
                 ))}
             </div>
